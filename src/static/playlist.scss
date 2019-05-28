@@ -1,0 +1,109 @@
+.playlist{
+  position: relative;
+  height: calc(100% - 50px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  top: 50px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.playlist-name > p{
+  position: relative;
+  left: 40px;
+  width: calc(100% - 40px);
+  color:  #ffffff;
+}
+.image-holder, .playlist-name{
+  position: relative;
+  top: 20px;
+}
+.image-holder{
+  img{
+    position: relative;
+    left: 40px;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+}
+.tracks-list{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  .track{
+    padding: 0;
+    margin: 0;
+  }
+}
+.track{
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 4.56em;
+  list-style-type: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  align-items: center;
+  text-align: center;
+  p{
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    width: calc(100% - 40px);
+    text-align: left;
+  }
+  span{
+    color: #ffffff;
+    width: 40px;
+  }
+}
+.track:hover{
+  background-color: rgba(0,0,0,.3);
+  cursor: pointer;
+}
+.active{
+  color: green !important;
+}
+.disabled-track{
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 4.56em;
+  list-style-type: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  align-items: center;
+  text-align: center;
+  p{
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    width: calc(100% - 40px);
+    text-align: left;
+    opacity: .4;
+  }
+  span{
+    color: #ffffff;
+    width: 40px;
+    opacity: .4;
+  }
+}

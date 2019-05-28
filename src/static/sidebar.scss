@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+a {
+  text-decoration: none;
+  color: #939496;
+}
+.sidebar {
+  position: absolute;
+  width: 230px;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 1);
+}
+.sidebar-header {
+  position: relative;
+    text-align: center;
+    top: 60px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    color: #ffffff;
+}
+.sidebar-menu-list {
+  position: relative;
+    top: 158px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    color: #939496;
+    list-style-type: none;
+    text-align: center;
+}
+.sidebar-menu-list > li {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  cursor: pointer;
+}
+.copyright {
+  position: relative;
+  text-align: center;
+  /* width: 135px; */
+  /* height: 17px; */
+  /* left: 58px; */
+  /* bottom: 90px; */
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(161, 165, 171, 0.5);
+  top: calc(100% - 330px)
+}
+ul li.router-link-active > a,
+ul li.router-link-exact-active > a {
+  text-decoration: none;
+  color: white;
+}

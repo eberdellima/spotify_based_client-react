@@ -1,0 +1,55 @@
+.content{
+  position: relative;
+  height: calc(100% - 46px);
+  width: calc(100% - 250px);
+  top: 46px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  h2{
+    position: relative;
+    top: -20px;
+    left: 20px;
+    width: 100%;
+    color: #fff;
+  }
+}
+.page-title > p{
+  width: 100%;
+}
+.page-title{
+  text-align: left;
+    position: relative;
+    top: 20px;
+    left: 40px;
+}
+.profile-pic-holder{
+  position: relative;
+  left: 20px;
+  top: -60px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  background-size: cover;
+  .avatar{
+    width: 100%;
+    height: 100%;
+  }
+}
+.username{
+  color: white;
+  font-size: xx-large;
+}
+.profile-container{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  top: 120px;
+  left: 40px;
+  position: relative;
+}
+.followers > p, .email > p{
+  color: #939496;
+  font-size: x-large;
+}

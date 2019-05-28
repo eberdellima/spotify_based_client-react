@@ -1,0 +1,62 @@
+.topbar {
+  position: absolute;
+  flex: 1;
+  flex-direction: row;
+  height: 40px;
+  width: 100vw;
+  z-index: 2;
+}
+.search-icon {
+  padding-left: 22px;
+    padding-bottom: 4px;
+    padding-top: 3px;
+    background-image: url('./Mask.svg');
+    background-repeat: no-repeat;
+    cursor: pointer;
+    vertical-align: sub;
+    vertical-align: -webkit-baseline-middle;
+    /* text-align: center; */
+    position: relative;
+    left: 4px;
+}
+form {
+  position: relative;
+  top: 12%;
+  left: 95vw;
+  transform: translate(-5%);
+  transition: all 1s;
+  width: 30px;
+  height: 30px;
+  background: #223444;
+  box-sizing: border-box;
+  border-radius: 25px;
+  // border: 4px solid #223444;
+  // padding: 5px;
+}
+input {
+  position: absolute;
+  top: 0;
+  // left: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  outline: 0;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px;
+  background-color: #223444;
+  color: #ffffff;
+}
+form:hover {
+  width: 200px;
+  left: 85vw;
+  cursor: pointer;
+  .search-icon{
+    display: none;
+  }
+}
+form:hover input {
+  display: block;
+}

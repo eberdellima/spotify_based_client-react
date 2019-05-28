@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+  #song-info{
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    color: white;
+    font-family: 'Gorditas';
+    font-size: large;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    p{
+      font-family: Lato;
+    }
+  }
+  .thumbnail{
+    width: 64px;
+    height: 64px;
+    padding: 8px
+  }
+  .player{
+    position: absolute;
+    background-color: #282828;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 80px;
+    z-index: 1;
+    border-top: 1px solid #000;
+    display: flex;
+    flex-direction: row;
+  }
+  audio{
+    position: absolute;
+    visibility: hidden;
+  }
+  .control-button{
+    position: relative;
+    top: 10%;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid #4cbb17;
+    cursor: pointer;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center right;
+  }
+  .control-button:hover{
+    -webkit-transition: none 33ms cubic-bezier(.3,0,0,1);
+    transition: none 33ms cubic-bezier(.3,0,0,1);
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transform: scale(1.06);
+    transform: scale(1.06);
+  }
+  .play-button{
+    background-image: url('./play-solid.svg');
+    background-size: 54px 40px;
+  }
+  .pause-button{
+    background-image: url('./pause-solid.svg');
+     background-size: 60px 40px;
+  }
+  #timeline{
+    position: relative;
+    top: 35px;
+    left: 20px;
+    width: calc(100% - 360px);
+    height: 10px;
+    background: #ffffff;
+    float: left;
+    border-radius: 15px;
+  }
+  #playhead{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4cbb17;
+    transition: margin-left 0.5s;
+  }
