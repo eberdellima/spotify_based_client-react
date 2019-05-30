@@ -21,7 +21,7 @@ class App extends React.Component {
       <Router>
         <Route exact path="/" component={Login} />
         <Route exact path='/login' render={() => {
-          window.location.href= `https://accounts.spotify.com/authorize?response_type=token&client_id=${this.state.client_id}&redirect_uri=http://localhost:3000/content/categories&scope=user-read-private%20user-read-email&show_dialog=true`;
+          window.location.href= `https://accounts.spotify.com/authorize?response_type=token&client_id=${this.state.client_id}&redirect_uri=https://spotify-based-client-react.herokuapp.com/content/categories&scope=user-read-private%20user-read-email&show_dialog=true`;
           return null;
         }}/>
         <Route path="/content" component={MainContent}/>
