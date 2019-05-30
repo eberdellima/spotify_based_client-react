@@ -14,7 +14,7 @@ class SearchResult extends React.Component {
   async componentDidMount() {
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'http://localhost:3000'
+      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
     }
     const query = this.props.location.search
     const result = await axios.get('https://api.spotify.com/v1/search?access_token=' + access_token + '&q=' + query.q + '&type=track&limit=3').catch(err => { console.log(err) })

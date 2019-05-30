@@ -16,7 +16,7 @@ class CategoryPlaylists extends React.Component {
     const name = this.props.match.params.name
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'http://localhost:3000'
+      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
     }
     const result = await axios.get('https://api.spotify.com/v1/browse/categories/' + name + '/playlists?access_token=' + access_token).catch(err => { console.log(err) })
     this.setState({categoryName: name, items: result.data.playlists.items})

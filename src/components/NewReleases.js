@@ -14,7 +14,7 @@ class NewReleases extends React.Component{
   async componentDidMount() {
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'http://localhost:3000'
+      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
     }
     const result = await axios.get('https://api.spotify.com/v1/browse/new-releases?access_token=' + access_token).catch(err => { console.log(err) })
     this.setState({items: result.data.albums.items})

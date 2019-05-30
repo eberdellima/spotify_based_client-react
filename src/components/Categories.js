@@ -16,7 +16,7 @@ class Categories extends Component {
     if(access_token === 'undefined' || !access_token){
       access_token = window.location.hash.split('=')[1]
       if(!access_token){
-        window.location.href = 'http://localhost:3000'
+        window.location.href = 'https://spotify-based-client-react.herokuapp.com'
       }
       window.localStorage.setItem('accessToken', access_token)
       setTimeout(() => { this.clearToken() }, 3600 * 1000)
@@ -24,7 +24,7 @@ class Categories extends Component {
     const result = await axios.get('https://api.spotify.com/v1/browse/categories?access_token=' + access_token).catch(err => { console.log(err) })
     if(!result){
       window.localStorage.removeItem('accessToken')
-      window.location.href = 'http://localhost:3000'
+      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
     }
     this.setState({items: result.data.categories.items})
   }

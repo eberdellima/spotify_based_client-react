@@ -49,7 +49,7 @@ class Playlist extends React.Component {
     const reqCase = this.props.location.search.split('=')[1]
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'http://localhost:3000'
+      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
     }
     let url = '';
     if(!this.state.tracks || this.state.tracks.length === 0) {

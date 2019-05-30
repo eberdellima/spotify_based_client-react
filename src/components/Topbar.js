@@ -9,7 +9,7 @@ const Topbar = () => {
     if (e.keyCode === 13) {
       let value = e.target.value;
       e.target.value = "";
-      window.location.href ="http://localhost:3000/content/search?q=" + value
+      window.location.href ="https://spotify-based-client-react.herokuapp.com/content/search?q=" + value
     }
   };
 
