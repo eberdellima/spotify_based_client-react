@@ -2,6 +2,9 @@
   "name": "spotify-based-client_react",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=0.10.48"
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "node-sass": "^4.12.0",
