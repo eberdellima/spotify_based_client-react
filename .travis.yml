@@ -2,3 +2,15 @@ language: node_js
 
 node_js: 
   - "8.10"
+
+branches:
+  only: 
+    - master
+
+notifications:
+  email:
+    recipients:
+      - eberdellima@gmail.com
+    on_success: always
+    on_failure: always
+
