@@ -1,11 +1,9 @@
 import React from "react";
+import { Route } from 'react-router-dom'
 
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
-
-import { Route } from 'react-router-dom'
-
 import Categories from './Categories';
 import Featured from './Featured';
 import NewReleases from './NewReleases';

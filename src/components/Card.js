@@ -1,43 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { getSectionData } from '../configs/section-data'
+
 import '../static/dumbgrid.scss'
+
+
+const CardImage = (props) => {
+  return <img src={props.src} id={props.id} alt={props.alt} />
+}
+
+
+const ImageText = (props) => {
+  return <div className="image-text">{props.name}</div>
+}
+
 
 const Card = (props) => {
 
-  let destination = ''
-  let reqCase = ''
-
-  if (props.sectionName === 'new releases') {
-    destination = '/content/playlist/'
-    reqCase = 2
-  } else if (props.sectionName === 'categories') {
-    destination = '/content/categories/'
-    reqCase = 1
-  } else if (props.sectionName === 'results:') {
-    destination = '/content/playlist/'
-    reqCase = 3
-  } else {
-    destination = '/content/playlist/'
-    reqCase = 1
-  }
+  const { destination, reqCase } = getSectionData(props.sectionName)
+  const image = props.images ? props.images[0] : props.icons[0]
+  const sectionName = props.sectionName
 
   return (
     <div className="card">
       <Link to={destination + props.id + '?case=' + reqCase}>
         <div className="container-data">
-          {
-            props.images ? 
-              <img src={props.images[0].url}  id={props.id} alt=""/>
-              : <img src={props.icons[0].url} id={props.id} alt=""/>
-          }
-          {
-            props.sectionName === 'categories' ? 
-              <div className="image-text">
-                {props.name}
-              </div>
-                : null
-          }
+          <CardImage src={image.url} id={props.id} alt="" />
+          { sectionName === 'categories' ? <ImageText name={props.name}/> : null }
         </div>
       </Link>
     </div>
