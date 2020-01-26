@@ -3,9 +3,18 @@ language: node_js
 node_js: 
   - "8.10"
 
+#safelist
 branches:
-  only: 
-    - master
+  only:
+  - master
+
+install:
+  - npm i
+
+jobs:
+  include:
+    - stage: test
+    - script: npm run test
 
 notifications:
   email:

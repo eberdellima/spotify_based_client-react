@@ -1,36 +1,10 @@
 import { createStore } from 'redux'
+import appReducer from './reducers/index';
 
-//state
-const initialState = {
-  song: {},
-  isPlaying: false
-}
+const store = createStore(appReducer)
 
-//filters
-const SET_SONG = "SET_SONG";
-const END_SONG = "END_SONG";
-const TOGGLE_SONG = "TOGGLE_SONG";
+store.subscribe(() => {
+  console.log(`store date: ${store.getState()}`)
+})
 
-//reducer
-function setNewSong (state = initialState, action) {
-  switch(action.type){
-    case SET_SONG : 
-      return Object.assign({}, state, {
-        song: action.song,
-        isPlaying: true
-      });
-    case TOGGLE_SONG:
-      return Object.assign({}, state, {
-        isPlaying: action.value
-      })
-    case END_SONG:
-      return Object.assign({}, state, {
-        isPlaying: false
-      })
-    default: return state
-  }
-}
-
-//store
-export const store = createStore(setNewSong, initialState)
-
+export default store
