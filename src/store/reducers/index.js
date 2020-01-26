@@ -6,24 +6,24 @@ function createReducer() {
   }
 
   const reducers = {
-    SET_SONG: (song) => {
+    SET_SONG: ({song, state}) => {
       return Object.assign({}, state, {
         song,
         isPlaying: true
       })
     },
   
-    TOGGLE_SONG: (isPlaying) => {
+    TOGGLE_SONG: ({isPlaying, state}) => {
       return Object.assign({}, state, { isPlaying })
     },
   
-    END_SONG: (isPlaying) => {
+    END_SONG: ({isPlaying, state}) => {
       return Object.assign({}, state, { isPlaying })
     }
   }
 
   return (state = initialState, action) => {
-    return reducers[action.type] ? reducers[action.type]({state, ...action}) : null
+    return reducers[action.type] ? reducers[action.type]({state, ...action}) : state
   }
 }
 

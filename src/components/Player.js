@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { 
+  dispatchEndSong, 
+  dispatchToggleSong
+} from '../store/dispatchers/index'
+
 import '../static/player.scss'
 
 
@@ -44,7 +49,7 @@ class Player extends React.Component {
   }
 
   endSong = (e) => {
-    this.props.toggleAudio({type: 'END_SONG'})
+    dispatchEndSong()
   }
 
   togglePlay = (e) => {
@@ -56,7 +61,7 @@ class Player extends React.Component {
         player.pause()
       }
       const isPlaying = this.props.isPlaying;
-      this.props.toggleAudio({type: 'TOGGLE_SONG', value: !isPlaying})
+      dispatchToggleSong(!isPlaying)
     }
   }
 
@@ -83,12 +88,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleAudio: (data) => {
-      dispatch(data)
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(mapStateToProps)(Player);

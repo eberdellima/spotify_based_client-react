@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { connect } from 'react-redux'
+
+import { dispatchSetSong } from '../store/dispatchers/index'
 
 import '../static/playlist.scss'
 
@@ -84,7 +85,7 @@ class Playlist extends React.Component {
     const uri = await tracks[index].track ? tracks[index].track.preview_url : tracks[index].preview_url
     const icon = await tracks[index].track ? tracks[index].track.album.images[2]
     : tracks[index].album ? tracks[index].album.images[2] : this.state.content.images[2]
-    this.props.setSong({type: 'SET_SONG', song: {name, uri, icon}})
+    dispatchSetSong({name,uri,icon})
     this.setState({active: index})
   }
 
@@ -104,12 +105,4 @@ class Playlist extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setSong: data => {
-      dispatch(data)
-    }
-  }
-}
-
-export default connect(null,mapDispatchToProps)(Playlist);
+export default Playlist;
