@@ -3,13 +3,13 @@ import React from "react";
 import "../static/topbar.scss";
 
 const Topbar = () => {
+  
   const search = e => {
     e.preventDefault();
-    console.log(1)
     if (e.keyCode === 13) {
       let value = e.target.value;
       e.target.value = "";
-      window.location.href ="https://spotify-based-client-react.herokuapp.com/content/search?q=" + value
+      window.location.href ="http://localhost:3000/content/search?q=" + value
     }
   };
 

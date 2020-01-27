@@ -19,7 +19,7 @@ jobs:
 notifications:
   email:
     recipients:
-      - eberdellima@gmail.com
+      - eberdellima@outlook.com
     on_success: always
     on_failure: always
 

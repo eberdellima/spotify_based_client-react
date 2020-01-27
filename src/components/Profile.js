@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import '../static/profile.scss'
@@ -25,39 +25,31 @@ const ProfileInfo = (props) => {
   )
 }
 
-class Profile extends React.Component {
+const Profile = () => {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      userData: {}
-    }
-  }
+  const [userData, setUserData] = useState({})
 
-  async componentDidMount() {
+  useEffect(() => {
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
+      window.location.href = 'http://localhost:300'
     }
-    const result = await axios.get('https://api.spotify.com/v1/me?access_token=' + access_token).catch(err => { console.log(err) })
-    this.setState({userData: result.data})
-  }
+    axios.get('https://api.spotify.com/v1/me?access_token=' + access_token)
+      .then(result => setUserData(result.data))
+      .catch(err => { console.log(err) })
+  })
 
-  render() {
-    const userData = this.state.userData
-
-    return ( 
-      <div className="content">
-        <div className="page-title">
-          <h2>Profile</h2>
-        </div>
-        <div className="profile-container">
-          <ProfileAvatar userData={userData}/>
-          <ProfileInfo userData={userData}/>
-        </div>
+  return ( 
+    <div className="content">
+      <div className="page-title">
+        <h2>Profile</h2>
       </div>
-    )
-  }
+      <div className="profile-container">
+        <ProfileAvatar userData={userData}/>
+        <ProfileInfo userData={userData}/>
+      </div>
+    </div>
+  )
 }
 
 export default Profile;

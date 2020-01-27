@@ -1,35 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import DumbGrid from './DumbGrid.js'
 import axios from 'axios'
 
-class CategoryPlaylists extends React.Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      items: [],
-      categoryName: ''
-    }
-  }
+const CategoryPlaylists = () => {
 
-  async componentDidMount() {
-    const name = this.props.match.params.name
+  const [items, setItems] = useState([])
+  const [categoryName, setCategoryName] = useState('')
+  const { name } = useParams()
+
+  useEffect(() => {
     const access_token = window.localStorage.getItem('accessToken')
-    if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
+    if(access_token === 'undefined' || !access_token) {
+      window.location.href = 'http://localhost:300'
     }
-    const result = await axios.get('https://api.spotify.com/v1/browse/categories/' + name + '/playlists?access_token=' + access_token).catch(err => { console.log(err) })
-    this.setState({categoryName: name, items: result.data.playlists.items})
-  }
+    axios.get('https://api.spotify.com/v1/browse/categories/' + name + '/playlists?access_token=' + access_token)
+      .then(result => {
+        setCategoryName(name)
+        setItems(result.data.playlists.items)
+      })
+      .catch(err => { console.log(err) })
+  }, [name])
 
-  render() {
-    const items = this.state.items
-    const name = this.state.categoryName
-
-    return (
-      <DumbGrid sectionName={name} items={items}/>
-    )
-  }
+  return <DumbGrid sectionName={categoryName} items={items} />
 }
 
 export default CategoryPlaylists;

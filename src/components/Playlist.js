@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { dispatchSetSong } from '../store/dispatchers/index'
@@ -33,27 +33,22 @@ const PlaylistTrack = (props) => {
   )
 }
 
+const Playlist = (props) => {
 
-class Playlist extends React.Component {
+  const [content, setContent] = useState({})
+  const [tracks, setTracks] = useState([])
+  const [active, setActive] = useState('')
 
-  constructor(props){
-    super(props)
-    this.state = {
-      content: {},
-      tracks: [],
-      active: ''
-    }
-  }
+  const id = props.match.params.id
+  const reqCase = props.location.search.split('=')[1]
 
-  async componentDidMount() {
-    const id = this.props.match.params.id
-    const reqCase = this.props.location.search.split('=')[1]
+  useEffect(() => {
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
+      window.location.href = 'http://localhost:3000'
     }
     let url = '';
-    if(!this.state.tracks || this.state.tracks.length === 0) {
+    if(!tracks || tracks.length === 0) {
       if (reqCase === '2') {
         url = 'https://api.spotify.com/v1/albums/'
       } else if (reqCase === '3') {
@@ -62,47 +57,39 @@ class Playlist extends React.Component {
         url = 'https://api.spotify.com/v1/playlists/'
       }
     }
-    const result = await axios.get(url + id + '?access_token=' + access_token).catch(err => { console.log(err) })
-    if (reqCase !== '3') {
-      const {images, name, tracks} = {...result.data}
-      this.setState({
-        content: {images, name},
-        tracks: tracks.items
+    axios.get(url + id + '?access_token=' + access_token)
+      .then(result => {
+        if(reqCase !== '3') {
+          const {images, name, tracks} = {...result.data}
+          setContent({images, name})
+          setTracks(tracks.items)
+        } else {
+          const {name} = {...result.data}
+          const images = result.data.album.images
+          setContent({images, name})
+          setTracks([{...result.data}])
+        }
       })
-    } else {
-      const {name} = {...result.data}
-      const images = result.data.album.images
-      this.setState({
-        content: {images, name},
-        tracks: [{...result.data}]
-      })
-    }
-  }
+      .catch(err => {console.log(err)})
+  }, [id, reqCase])
 
-  selectSong = async (index) => {
-    const tracks = this.state.tracks
+  const selectSong = async (index) => {
     const name = await tracks[index].track ? tracks[index].track.name : tracks[index].name
     const uri = await tracks[index].track ? tracks[index].track.preview_url : tracks[index].preview_url
     const icon = await tracks[index].track ? tracks[index].track.album.images[2]
-    : tracks[index].album ? tracks[index].album.images[2] : this.state.content.images[2]
+    : tracks[index].album ? tracks[index].album.images[2] : content.images[2]
     dispatchSetSong({name,uri,icon})
-    this.setState({active: index})
+    setActive(index)
   }
 
-  render() {
-    const content = this.state.content
-    const tracks = this.state.tracks
-    const active = this.state.active
-
-    return (
-      <div className="playlist">
-        <PlaylistInfo content={content} />
-        <div className="tracks-list">
-          {tracks.map((track, index) => <PlaylistTrack selectSong={this.selectSong} key={index} track={track} index={index} active={active}/>)}
-        </div>
+  return (
+    <div className="playlist">
+      <PlaylistInfo content={content} />
+      <div className="tracks-list">
+        {tracks.map((track, index) => <PlaylistTrack selectSong={selectSong} key={index} track={track} index={index} active={active}/>)}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Playlist;

@@ -23,7 +23,7 @@ const SongInfo = (props) => {
   )
 }
 
-const FakeAudio = (props) => {
+const FakeAudio = () => {
   return (
     <div id="timeline">
       <div id="playhead"></div>

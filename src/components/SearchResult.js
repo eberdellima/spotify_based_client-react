@@ -1,40 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import DumbGrid from './DumbGrid.js'
 
-class SearchResult extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      items: []
-    }
-  }
+const SearchResult = (props) => {
 
-  async componentDidMount() {
+  const [items, setItems] = useState([])
+  
+  let query = props.location.search 
+  query = query.split('').slice(1).join('')
+
+  useEffect(() => {
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
+      window.location.href = 'http://localhost:3000'
     }
-    const query = this.props.location.search
-    const result = await axios.get('https://api.spotify.com/v1/search?access_token=' + access_token + '&q=' + query.q + '&type=track&limit=3').catch(err => { console.log(err) })
-    const tracks = result.data.tracks.items.map(track => {
-      return {
-        images: [...track.album.images],
-        name: track.name,
-        id: track.id
-      }
-    })
-    this.setState({items: tracks})
-  }
+    axios.get('https://api.spotify.com/v1/search?access_token=' + access_token + '&' + query+ '&type=track&limit=3')
+      .then(result => {
+        console.log(result)
+        const tracks = result.data.tracks.items.map(track => {
+          return {
+            images: [...track.album.images],
+            name: track.name,
+            id: track.id
+          }
+        })
+        setItems(tracks)
+      })
+      .catch(err => { console.log(err) })
+  }, [query])
 
-  render() {
-    const items = this.state.items
-    return (
-      <DumbGrid sectionName='results:' items={items} />
-    )
-  }
-
+  return <DumbGrid sectionName='results:' items={items} />
 }
 
 export default SearchResult

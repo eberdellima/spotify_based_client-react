@@ -1,33 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 import DumbGrid from './DumbGrid.js'
 
-class NewReleases extends React.Component{
 
-  constructor(props){
-    super(props)
-    this.state ={ 
-      items : []
-    }
-  }
+const NewReleases = () => {
 
-  async componentDidMount() {
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
     const access_token = window.localStorage.getItem('accessToken')
     if (access_token === 'undefined' || !access_token) {
-      window.location.href = 'https://spotify-based-client-react.herokuapp.com'
+      window.location.href = 'http://localhost:300'
     }
-    const result = await axios.get('https://api.spotify.com/v1/browse/new-releases?access_token=' + access_token).catch(err => { console.log(err) })
-    this.setState({items: result.data.albums.items})
-  }
+    axios.get('https://api.spotify.com/v1/browse/new-releases?access_token=' + access_token)
+      .then(result => {setItems(result.data.albums.items)})
+      .catch(err => { console.log(err) })
+  })
 
-  render() {
-    const items = this.state.items
-
-    return (
-      <DumbGrid sectionName='new releases' items={items} />
-    )
-  }
-
+  return <DumbGrid sectionName='new release' items={items} />
 }
 
 export default NewReleases;
